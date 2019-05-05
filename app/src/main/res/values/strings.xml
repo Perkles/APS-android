@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Aps</string>
 
-    <string name="Farm">Farm</string>
-    <string name="Jungle">Jungle</string>
-    <string name="Savana">Savana</string>
-    <string name="Sea">Sea</string>
+    <string name="farm">Farm</string>
+    <string name="jungle">Jungle</string>
+    <string name="savana">Savana</string>
+    <string name="sea">Sea</string>
 </resources>

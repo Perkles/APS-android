@@ -32,32 +32,32 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_farm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Farm" />
+            android:text="@string/farm" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_jungle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Jungle" />
+            android:text="@string/jungle" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/button_savana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Savana" />
+            android:text="@string/savana" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/button_sea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Sea" />
+            android:text="@string/sea" />
 
     </LinearLayout>
 
