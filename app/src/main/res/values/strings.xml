@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Aps</string>
+
+    <string name="Farm">Farm</string>
+    <string name="Jungle">Jungle</string>
+    <string name="Savana">Savana</string>
+    <string name="Sea">Sea</string>
+</resources>
