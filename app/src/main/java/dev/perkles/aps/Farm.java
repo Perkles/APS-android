@@ -23,6 +23,7 @@ public class Farm extends AppCompatActivity {
         @Override
         public boolean onLongClick(View v) {
             ClipData data = ClipData.newPlainText("simple_test", "teste");
+
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(data, shadowBuilder, v, 0);
             v.setVisibility(View.INVISIBLE);
@@ -42,16 +43,12 @@ public class Farm extends AppCompatActivity {
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
-
                 case DragEvent.ACTION_DRAG_LOCATION:
                     break;
-
                 case DragEvent.ACTION_DROP:
                     break;
-
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
-
                 case DragEvent.ACTION_DRAG_ENDED:
                     break;
             }
