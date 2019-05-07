@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
 
+import java.util.List;
+
+import models.Animal;
 import models.Enviroment;
 
 public class Farm extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class Farm extends AppCompatActivity {
 
         Enviroment farmEnviroment = new Enviroment();
         farmEnviroment.populate();
+        List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
+        farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
 
         findViewById(R.id.imageView_sheep_placeholder).setOnLongClickListener(new MyOnLongClickListener());
         findViewById(R.id.imageView_sheep).setOnLongClickListener(new MyOnLongClickListener());
