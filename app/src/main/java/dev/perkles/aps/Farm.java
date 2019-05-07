@@ -7,12 +7,17 @@ import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
 
+import models.Enviroment;
+
 public class Farm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm);
+
+        Enviroment farmEnviroment = new Enviroment();
+        farmEnviroment.populate();
 
         findViewById(R.id.imageView_sheep_placeholder).setOnLongClickListener(new MyOnLongClickListener());
         findViewById(R.id.imageView_sheep).setOnLongClickListener(new MyOnLongClickListener());

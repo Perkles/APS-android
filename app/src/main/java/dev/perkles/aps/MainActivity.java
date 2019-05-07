@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
+import models.Enviroment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button farmButton = findViewById(R.id.button_farm);
+        final Button farmButton = findViewById(R.id.button_farm);
         Button jungleButton = findViewById(R.id.button_jungle);
         Button savanaButton = findViewById(R.id.button_savana);
         Button oceanButton = findViewById(R.id.button_ocean);
