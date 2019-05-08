@@ -19,14 +19,11 @@ public class Enviroment {
         this.enviromentName = enviromentName;
     }
 
-    public Animal getAnimal() {
-        return null;
-    }
     
     public Animal returnAnimalById(int animalId){
-        Animal pickedAnimal = new Animal(1,"Sheep", R.id.imageView_sheep, R.id.imageView_sheep_placeholder);
+        Animal pickedAnimal = new Animal(0,"", 0, 0);
         for (Animal animal : this.enviromentAnimals) {
-            if(animal.getId() == animalId){
+            if(animalId == animal.getId()){
                 pickedAnimal = animal;
             }
         }
@@ -51,33 +48,26 @@ public class Enviroment {
     }
 
     public List<Animal> randomize(int maxAmount) {
-        maxAmount = maxAmount -1;
         List<Animal> randomizedList = new ArrayList<>();
-
         while (maxAmount != 0){
-
             Random randomize = new Random();
-
             randomizedList.add(this.returnAnimalById(randomize.nextInt(this.enviromentAnimals.size())));
-
             maxAmount -=1;
         }
         return randomizedList;
     }
 
-    public void choseOneAnimalFrom(List<Animal> randomizeAnimals){
-/*        Animal chosedAnimal = new Animal(1,"Sheep", R.id.imageView_sheep, R.id.imageView_sheep_placeholder);
+    public Animal choseOneAnimalFrom(List<Animal> randomizeAnimals) {
 
+        Animal choosedAnimal = new Animal(0,"", 0, 0);
         Random randomize = new Random();
         int index = randomize.nextInt(randomizeAnimals.size());
-
-        chosedAnimal = randomizeAnimals.returnAnimalById();
-
-
-
-        return null;*/
-
+        for (Animal animal : randomizeAnimals) {
+            if(index == animal.getId()){
+                choosedAnimal = animal;
+            }
+        }
+        return choosedAnimal;
     }
-
 
 }

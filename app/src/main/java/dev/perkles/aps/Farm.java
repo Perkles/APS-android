@@ -22,7 +22,7 @@ public class Farm extends AppCompatActivity {
         Enviroment farmEnviroment = new Enviroment();
         farmEnviroment.populate();
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
-        farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
+        Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
 
         findViewById(R.id.imageView_sheep_placeholder).setOnLongClickListener(new MyOnLongClickListener());
         findViewById(R.id.imageView_sheep).setOnLongClickListener(new MyOnLongClickListener());
