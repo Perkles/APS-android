@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                String descricao = "Módulo nao disponpivel";
+                String descricao = "Módulo nao disponível";
                 Toast.makeText(getApplicationContext(), descricao, Toast.LENGTH_SHORT).show();
             }
         });
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                String descricao = "Módulo nao disponpivel";
+                String descricao = "Módulo nao disponível";
                 Toast.makeText(getApplicationContext(), descricao, Toast.LENGTH_SHORT).show();
             }
         });
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                String descricao = "Módulo nao disponpivel";
+                String descricao = "Módulo nao disponível";
                 Toast.makeText(getApplicationContext(), descricao, Toast.LENGTH_SHORT).show();
             }
         });
