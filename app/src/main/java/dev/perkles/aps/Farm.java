@@ -2,11 +2,15 @@ package dev.perkles.aps;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -20,13 +24,23 @@ public class Farm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm);
 
+        LinearLayout aplicationAnimalPlaceholderView = findViewById(R.id.animal_placeholder);
+        LinearLayout aplicationAnimalPhotoView = findViewById(R.id.animal_photo_one);
+        LinearLayout aplicationAnimalPhotoViewTwoo = findViewById(R.id.animal_photo_twoo);
+        LinearLayout aplicationAnimalPhotoViewThree = findViewById(R.id.animal_photo_three);
+
+        Context context = this;
         Enviroment farmEnviroment = new Enviroment();
-        farmEnviroment.populate();
+        farmEnviroment.populate(context);
+
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
 
-        findViewById(R.id.imageView_sheep_placeholder).setOnTouchListener(new TouchEvent());
-        findViewById(R.id.imageView_sheep).setOnTouchListener(new TouchEvent());
+        aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
+        aplicationAnimalPhotoView.addView(chosedAnimal.getAnimalPhoto());
+
+        chosedAnimal.getAnimalPhoto().setOnTouchListener(new TouchEvent());
+        chosedAnimal.getAnimalShadow().setOnTouchListener(new TouchEvent());
     }
 
     class TouchEvent implements View.OnTouchListener {

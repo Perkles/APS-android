@@ -6,15 +6,8 @@ public class Animal {
 
     private int id;
     private String animalName;
-    private int animalPhoto;
-    private int animalShadow;
-
-    public Animal(int id, String sheep, int imageView_sheep, int imageView_sheep_placeholder) {
-        this.id = id;
-        this.animalName = sheep;
-        this.animalPhoto = imageView_sheep;
-        this.animalShadow = imageView_sheep_placeholder;
-    }
+    private ImageView animalPhoto;
+    private ImageView animalShadow;
 
     public int getId() {
         return id;
@@ -32,20 +25,19 @@ public class Animal {
         this.animalName = animalName;
     }
 
-    public int getAnimalPhoto() {
+    public ImageView getAnimalPhoto() {
         return animalPhoto;
     }
 
-    public void setAnimalPhoto(int animalPhoto) {
+    public void setAnimalPhoto(ImageView animalPhoto) {
         this.animalPhoto = animalPhoto;
     }
 
-    public int getAnimalShadow() {
+    public ImageView getAnimalShadow() {
         return animalShadow;
     }
 
-    public void setAnimalShadow(int animalShadow) {
+    public void setAnimalShadow(ImageView animalShadow) {
         this.animalShadow = animalShadow;
     }
-
 }
