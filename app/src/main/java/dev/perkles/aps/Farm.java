@@ -5,6 +5,7 @@ import android.content.ClipDescription;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.List;
@@ -24,20 +25,20 @@ public class Farm extends AppCompatActivity {
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
 
-        findViewById(R.id.imageView_sheep_placeholder).setOnLongClickListener(new MyOnLongClickListener());
-        findViewById(R.id.imageView_sheep).setOnLongClickListener(new MyOnLongClickListener());
+        findViewById(R.id.imageView_sheep_placeholder).setOnTouchListener(new TouchEvent());
+        findViewById(R.id.imageView_sheep).setOnTouchListener(new TouchEvent());
     }
 
-    class MyOnLongClickListener implements View.OnLongClickListener {
+    class TouchEvent implements View.OnTouchListener {
 
         @Override
-        public boolean onLongClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
             ClipData data = ClipData.newPlainText("simple_test", "teste");
 
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(data, shadowBuilder, v, 0);
             v.setVisibility(View.INVISIBLE);
-            return true;
+            return false;
         }
     }
 
