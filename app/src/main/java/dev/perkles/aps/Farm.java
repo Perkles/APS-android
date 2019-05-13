@@ -64,17 +64,24 @@ public class Farm extends AppCompatActivity {
             int action = event.getAction();
 
             switch (action){
+
                 case DragEvent.ACTION_DRAG_STARTED:
+                    // Ação chamada quando o evento de arrastar inicia-se
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    break;
-                case DragEvent.ACTION_DRAG_LOCATION:
-                    break;
-                case DragEvent.ACTION_DROP:
+                    // Evento chamado quando o objeto arrastado entra em uma área específica
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
+                    // Identifica quando o objeto arrastado deixou específica área
+                    break;
+                case DragEvent.ACTION_DRAG_LOCATION:
+                    // Local do objeto arrastado
+                    break;
+                case DragEvent.ACTION_DROP:
+                    // Identifica evento de soltar objeto arrastado
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
+                    // Termina o evento.
                     break;
             }
             return true;
