@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,9 +31,8 @@ public class Farm extends AppCompatActivity {
         LinearLayout aplicationAnimalPhotoViewTwoo = findViewById(R.id.animal_photo_twoo);
         LinearLayout aplicationAnimalPhotoViewThree = findViewById(R.id.animal_photo_three);
 
-        Context context = this;
         Enviroment farmEnviroment = new Enviroment();
-        farmEnviroment.populate(context);
+        farmEnviroment.populate(getApplicationContext());
 
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
@@ -41,10 +41,10 @@ public class Farm extends AppCompatActivity {
 
 
         aplicationAnimalPhotoView.addView(chosedAnimal.getAnimalPhoto());
-        aplicationAnimalPhotoViewTwoo.removeAllViews();
-        aplicationAnimalPhotoViewTwoo.addView(randomizeAnimals.get(1).getAnimalPhoto());
-        aplicationAnimalPhotoViewThree.removeAllViews();
-        aplicationAnimalPhotoViewThree.addView(randomizeAnimals.get(2).getAnimalPhoto());
+
+/*        aplicationAnimalPhotoViewTwoo.addView(randomizeAnimals.get(1).getAnimalPhoto());*/
+
+/*        aplicationAnimalPhotoViewThree.addView(randomizeAnimals.get(2).getAnimalPhoto());*/
 
 
         chosedAnimal.getAnimalPhoto().setOnTouchListener(new TouchEvent());
