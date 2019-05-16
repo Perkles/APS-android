@@ -3,6 +3,7 @@ package dev.perkles.aps;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,10 +38,17 @@ public class Farm extends AppCompatActivity {
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
 
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
+
+
         aplicationAnimalPhotoView.addView(chosedAnimal.getAnimalPhoto());
+        aplicationAnimalPhotoViewTwoo.removeAllViews();
+        aplicationAnimalPhotoViewTwoo.addView(randomizeAnimals.get(1).getAnimalPhoto());
+        aplicationAnimalPhotoViewThree.removeAllViews();
+        aplicationAnimalPhotoViewThree.addView(randomizeAnimals.get(2).getAnimalPhoto());
+
 
         chosedAnimal.getAnimalPhoto().setOnTouchListener(new TouchEvent());
-        chosedAnimal.getAnimalShadow().setOnTouchListener(new TouchEvent());
+
     }
 
     class TouchEvent implements View.OnTouchListener {
@@ -59,7 +67,7 @@ public class Farm extends AppCompatActivity {
     class MyOnDragListener implements View.OnDragListener {
 
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View draggedView, DragEvent event) {
 
             int action = event.getAction();
 
@@ -67,9 +75,14 @@ public class Farm extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_STARTED:
                     // Ação chamada quando o evento de arrastar inicia-se
-                    break;
+                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                        return (true);
+                    }else{
+                        return false;
+                    }
                 case DragEvent.ACTION_DRAG_ENTERED:
                     // Evento chamado quando o objeto arrastado entra em uma área específica
+                    draggedView.setBackgroundColor(Color.BLACK);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
                     // Identifica quando o objeto arrastado deixou específica área
@@ -78,6 +91,7 @@ public class Farm extends AppCompatActivity {
                     // Local do objeto arrastado
                     break;
                 case DragEvent.ACTION_DROP:
+
                     // Identifica evento de soltar objeto arrastado
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
