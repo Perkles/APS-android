@@ -1,12 +1,15 @@
 package models;
 
 import android.content.Context;
+import android.view.ViewParent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import dev.perkles.aps.Farm;
 import dev.perkles.aps.R;
 
 public class Enviroment {
@@ -37,13 +40,20 @@ public class Enviroment {
        this.enviromentAnimals.add(animal);
     }
 
-    public List<Animal> randomize(int maxAmount) {
+    public List<Animal> randomize(int maxAmount, LinearLayout aplicationAnimalPhotoView, LinearLayout aplicationAnimalPhotoViewTwoo, LinearLayout aplicationAnimalPhotoViewThree) {
         List<Animal> randomizedList = new ArrayList<>();
         while (maxAmount != 0){
             Random randomize = new Random();
             int randomIndex = randomize.nextInt(this.enviromentAnimals.size() +1);
             if (randomIndex == 0){
                 randomIndex +=1;
+            }
+            if (maxAmount == 1){
+                aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+            }else if(maxAmount == 2){
+                aplicationAnimalPhotoViewTwoo.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+            }else if(maxAmount == 3){
+                aplicationAnimalPhotoViewThree.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
             }
             randomizedList.add(this.returnAnimalById(randomIndex));
             maxAmount -=1;

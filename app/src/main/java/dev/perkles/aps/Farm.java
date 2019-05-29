@@ -27,28 +27,20 @@ public class Farm extends AppCompatActivity {
         setContentView(R.layout.activity_farm);
 
         LinearLayout aplicationAnimalPlaceholderView = findViewById(R.id.animal_placeholder);
+
         LinearLayout aplicationAnimalPhotoView = findViewById(R.id.animal_photo_one);
         LinearLayout aplicationAnimalPhotoViewTwoo = findViewById(R.id.animal_photo_twoo);
         LinearLayout aplicationAnimalPhotoViewThree = findViewById(R.id.animal_photo_three);
 
+        Context context = this;
+        Enviroment farmEnviroment = new Enviroment();
+        farmEnviroment.populate(context);
         Enviroment farmEnviroment = new Enviroment();
         farmEnviroment.populate(getApplicationContext());
 
-        List<Animal> randomizeAnimals = farmEnviroment.randomize(3);
+        List<Animal> randomizeAnimals = farmEnviroment.randomize(3,aplicationAnimalPhotoView,aplicationAnimalPhotoViewTwoo,aplicationAnimalPhotoViewThree);
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
-
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
-
-
-        aplicationAnimalPhotoView.addView(chosedAnimal.getAnimalPhoto());
-
-/*        aplicationAnimalPhotoViewTwoo.addView(randomizeAnimals.get(1).getAnimalPhoto());*/
-
-/*        aplicationAnimalPhotoViewThree.addView(randomizeAnimals.get(2).getAnimalPhoto());*/
-
-
-        chosedAnimal.getAnimalPhoto().setOnTouchListener(new TouchEvent());
-
     }
 
     class TouchEvent implements View.OnTouchListener {

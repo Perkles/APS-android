@@ -42,14 +42,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/farm" />
+                android:text="@string/farm"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button"/>
 
             <Button
                 android:id="@+id/button_jungle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/jungle" />
+                android:text="@string/jungle"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/button"/>
 
         </LinearLayout>
 
@@ -63,14 +70,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/savana" />
+                android:text="@string/savana"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button"/>
 
             <Button
                 android:id="@+id/button_ocean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/ocean" />
+                android:text="@string/ocean"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/button"/>
 
         </LinearLayout>
     </LinearLayout>
