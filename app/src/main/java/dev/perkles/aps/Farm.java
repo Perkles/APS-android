@@ -3,12 +3,14 @@ package dev.perkles.aps;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -31,20 +33,14 @@ public class Farm extends AppCompatActivity {
         LinearLayout aplicationAnimalPhotoViewThree = findViewById(R.id.animal_photo_three);
 
         Context context = this;
-
         Enviroment farmEnviroment = new Enviroment();
-
         farmEnviroment.populate(context);
+        Enviroment farmEnviroment = new Enviroment();
+        farmEnviroment.populate(getApplicationContext());
 
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3,aplicationAnimalPhotoView,aplicationAnimalPhotoViewTwoo,aplicationAnimalPhotoViewThree);
-
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
-
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
-
-        aplicationAnimalPhotoView.setOnTouchListener(new TouchEvent());
-        aplicationAnimalPhotoViewTwoo.setOnTouchListener(new TouchEvent());
-        aplicationAnimalPhotoViewThree.setOnTouchListener(new TouchEvent());
     }
 
     class TouchEvent implements View.OnTouchListener {
@@ -63,22 +59,35 @@ public class Farm extends AppCompatActivity {
     class MyOnDragListener implements View.OnDragListener {
 
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View draggedView, DragEvent event) {
 
             int action = event.getAction();
 
             switch (action){
+
                 case DragEvent.ACTION_DRAG_STARTED:
-                    break;
+                    // Ação chamada quando o evento de arrastar inicia-se
+                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                        return (true);
+                    }else{
+                        return false;
+                    }
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    break;
-                case DragEvent.ACTION_DRAG_LOCATION:
-                    break;
-                case DragEvent.ACTION_DROP:
+                    // Evento chamado quando o objeto arrastado entra em uma área específica
+                    draggedView.setBackgroundColor(Color.BLACK);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
+                    // Identifica quando o objeto arrastado deixou específica área
+                    break;
+                case DragEvent.ACTION_DRAG_LOCATION:
+                    // Local do objeto arrastado
+                    break;
+                case DragEvent.ACTION_DROP:
+
+                    // Identifica evento de soltar objeto arrastado
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
+                    // Termina o evento.
                     break;
             }
             return true;
