@@ -42,12 +42,18 @@ public class Enviroment {
 
     public List<Animal> randomize(int maxAmount, LinearLayout aplicationAnimalPhotoView, LinearLayout aplicationAnimalPhotoViewTwoo, LinearLayout aplicationAnimalPhotoViewThree) {
         List<Animal> randomizedList = new ArrayList<>();
+        List<Integer> uniqueIndexes = new ArrayList<>();
         while (maxAmount != 0){
             Random randomize = new Random();
-            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() +1);
-            if (randomIndex == 0){
-                randomIndex +=1;
+            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
+            
+            if(uniqueIndexes.contains(randomIndex)){
+                while (uniqueIndexes.contains(randomIndex)){
+                    randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
+                }
             }
+            uniqueIndexes.add(randomIndex);
+
             if (maxAmount == 1){
                 aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
             }else if(maxAmount == 2){
