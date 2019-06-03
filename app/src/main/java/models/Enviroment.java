@@ -61,11 +61,17 @@ public class Enviroment {
             uniqueIndexes.add(randomIndex);
 
             if (maxAmount == RandomViewOrder[0]){
+                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
             }else if(maxAmount == RandomViewOrder[1]){
+                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewTwoo.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
             }else if(maxAmount == RandomViewOrder[2]){
+                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewThree.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
             }
             randomizedList.add(this.returnAnimalById(randomIndex));
             maxAmount -=1;
