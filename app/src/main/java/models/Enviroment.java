@@ -2,16 +2,17 @@ package models;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.IntStream;
 
-import dev.perkles.aps.Farm;
-import dev.perkles.aps.MainActivity;
 import dev.perkles.aps.R;
 
 public class Enviroment {
@@ -45,28 +46,66 @@ public class Enviroment {
     public List<Animal> randomize(int maxAmount, LinearLayout aplicationAnimalPhotoView, LinearLayout aplicationAnimalPhotoViewTwoo, LinearLayout aplicationAnimalPhotoViewThree) {
         List<Animal> randomizedList = new ArrayList<>();
         List<Integer> uniqueIndexes = new ArrayList<>();
+
+        int RandomViewOrder[] = generateRandomViewOrder();
+
         while (maxAmount != 0){
             Random randomize = new Random();
-            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
+            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 2 ;
 
             if(uniqueIndexes.contains(randomIndex)){
                 while (uniqueIndexes.contains(randomIndex)){
-                    randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
+                    randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 2 ;
                 }
             }
             uniqueIndexes.add(randomIndex);
 
-            if (maxAmount == 1){
+            if (maxAmount == RandomViewOrder[0]){
                 aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-            }else if(maxAmount == 2){
+            }else if(maxAmount == RandomViewOrder[1]){
                 aplicationAnimalPhotoViewTwoo.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-            }else if(maxAmount == 3){
+            }else if(maxAmount == RandomViewOrder[2]){
                 aplicationAnimalPhotoViewThree.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
             }
             randomizedList.add(this.returnAnimalById(randomIndex));
             maxAmount -=1;
         }
         return randomizedList;
+    }
+
+    public int[] generateRandomViewOrder(){
+        int intArray[] = new int[3];
+        int randomOrderIndex = 3;
+
+        Random randomizeNumber = new Random();
+
+        while (randomOrderIndex !=0){
+
+            int randomIndex = randomizeNumber.nextInt(4 - 1) + 1;
+
+            if(contains(intArray, randomIndex)){
+                while(contains(intArray, randomIndex)){
+                    randomIndex = randomizeNumber.nextInt(4 - 1) + 1;
+                }
+            }
+            intArray[randomOrderIndex -1] = randomIndex;
+            randomOrderIndex -= 1;
+        }
+        return intArray;
+    }
+
+    public static boolean contains(int[] array, int v) {
+
+        boolean result = false;
+
+        for(int i : array){
+            if(i == v){
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 
     public Animal choseOneAnimalFrom(List<Animal> randomizeAnimals) {
