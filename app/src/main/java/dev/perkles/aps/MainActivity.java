@@ -7,10 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
-import models.Enviroment;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Button jungleButton = findViewById(R.id.button_jungle);
         Button savanaButton = findViewById(R.id.button_savana);
         Button oceanButton = findViewById(R.id.button_ocean);
+
+        Intent svc=new Intent(this, BackgroundMusic.class);
+/*        startService(svc);*/
 
         farmButton.setOnClickListener(new View.OnClickListener(){
 

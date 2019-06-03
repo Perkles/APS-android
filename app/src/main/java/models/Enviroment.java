@@ -1,6 +1,7 @@
 package models;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import dev.perkles.aps.Farm;
+import dev.perkles.aps.MainActivity;
 import dev.perkles.aps.R;
 
 public class Enviroment {
@@ -46,7 +48,7 @@ public class Enviroment {
         while (maxAmount != 0){
             Random randomize = new Random();
             int randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
-            
+
             if(uniqueIndexes.contains(randomIndex)){
                 while (uniqueIndexes.contains(randomIndex)){
                     randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 1 ;
@@ -88,10 +90,12 @@ public class Enviroment {
 
         Animal donkey = new Animal();
         donkey.setId(1);
-        donkey.setAnimalName("Downkey");
+        donkey.setAnimalName("Donkey");
         donkey.setAnimalPhoto(imageViewDonkey);
         donkey.setAnimalShadow(imageViewDonkeyShwadow);
 
+        MediaPlayer donkey_sound_effect = MediaPlayer.create(viewContext,R.raw.horse_sf);
+        donkey.setAnimalSound(donkey_sound_effect);
 
         ImageView imageViewSheep = new ImageView(viewContext);
         imageViewSheep.setImageResource(R.drawable.sheep);
@@ -104,6 +108,9 @@ public class Enviroment {
         sheep.setAnimalPhoto(imageViewSheep);
         sheep.setAnimalShadow(imageViewSheepShadow);
 
+        MediaPlayer sheep_sound_effect = MediaPlayer.create(viewContext,R.raw.sheep_sf);
+        donkey.setAnimalSound(sheep_sound_effect);
+
         ImageView imageViewRooster = new ImageView(viewContext);
         imageViewRooster.setImageResource(R.drawable.rooster);
         ImageView imageViewRoosterShadow = new ImageView(viewContext);
@@ -115,6 +122,9 @@ public class Enviroment {
         rooster.setAnimalPhoto(imageViewRooster);
         rooster.setAnimalShadow(imageViewRoosterShadow);
 
+        MediaPlayer rooster_sound_effect = MediaPlayer.create(viewContext,R.raw.rooster_sf);
+        donkey.setAnimalSound(rooster_sound_effect);
+
         ImageView imageViewPig = new ImageView(viewContext);
         imageViewPig.setImageResource(R.drawable.pig);
         ImageView imageViewPigShadow = new ImageView(viewContext);
@@ -125,6 +135,9 @@ public class Enviroment {
         pig.setAnimalName("Pig");
         pig.setAnimalPhoto(imageViewPig);
         pig.setAnimalShadow(imageViewPigShadow);
+
+        MediaPlayer pig_sound_effect = MediaPlayer.create(viewContext,R.raw.pig_sf);
+        donkey.setAnimalSound(pig_sound_effect);
 
         this.setAnimal(donkey);
         this.setAnimal(sheep);
