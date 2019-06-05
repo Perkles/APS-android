@@ -29,15 +29,15 @@ public class Farm extends AppCompatActivity {
         LinearLayout imageView3 = findViewById(R.id.animal_photo_three);
 
         Context context = this;
-
+      
         Enviroment farmEnviroment = new Enviroment();
-
+      
         farmEnviroment.populate(context);
-
+      
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3,imageView1,imageView2,imageView3);
-
+      
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
-
+      
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
 
         imageView1.setOnTouchListener(new draggableView());
@@ -73,8 +73,10 @@ public class Farm extends AppCompatActivity {
         public boolean onDrag(View dropedView, DragEvent event) {
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    break;
                 case DragEvent.ACTION_DRAG_ENTERED:
+                    draggedView.setBackgroundColor(Color.BLACK);
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
