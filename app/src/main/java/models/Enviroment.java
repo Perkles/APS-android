@@ -65,13 +65,13 @@ public class Enviroment {
                 aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
                 aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
             }else if(maxAmount == RandomViewOrder[1]){
-                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
+                String IMAGEVIEW_TAG2 = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewTwoo.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
+                aplicationAnimalPhotoViewTwoo.setTag(IMAGEVIEW_TAG2);
             }else if(maxAmount == RandomViewOrder[2]){
-                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
+                String IMAGEVIEW_TAG3 = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewThree.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
+                aplicationAnimalPhotoViewThree.setTag(IMAGEVIEW_TAG3);
             }
             randomizedList.add(this.returnAnimalById(randomIndex));
             maxAmount -=1;
