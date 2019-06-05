@@ -1,17 +1,13 @@
 package dev.perkles.aps;
 
 import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.Context;
-import android.graphics.Color;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -28,69 +24,77 @@ public class Farm extends AppCompatActivity {
 
         LinearLayout aplicationAnimalPlaceholderView = findViewById(R.id.animal_placeholder);
 
-        LinearLayout aplicationAnimalPhotoView = findViewById(R.id.animal_photo_one);
-        LinearLayout aplicationAnimalPhotoViewTwoo = findViewById(R.id.animal_photo_twoo);
-        LinearLayout aplicationAnimalPhotoViewThree = findViewById(R.id.animal_photo_three);
+        LinearLayout imageView1 = findViewById(R.id.animal_photo_one);
+        LinearLayout imageView2 = findViewById(R.id.animal_photo_twoo);
+        LinearLayout imageView3 = findViewById(R.id.animal_photo_three);
 
         Context context = this;
+      
         Enviroment farmEnviroment = new Enviroment();
+      
         farmEnviroment.populate(context);
-        Enviroment farmEnviroment = new Enviroment();
-        farmEnviroment.populate(getApplicationContext());
-
-        List<Animal> randomizeAnimals = farmEnviroment.randomize(3,aplicationAnimalPhotoView,aplicationAnimalPhotoViewTwoo,aplicationAnimalPhotoViewThree);
+      
+        List<Animal> randomizeAnimals = farmEnviroment.randomize(3,imageView1,imageView2,imageView3);
+      
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
+      
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
-    }
 
-    class TouchEvent implements View.OnTouchListener {
+        imageView1.setOnTouchListener(new draggableView());
+        imageView2.setOnTouchListener(new draggableView());
+        imageView3.setOnTouchListener(new draggableView());
+
+        String CHOSED_TAG = chosedAnimal.getAnimalName();
+        aplicationAnimalPlaceholderView.setOnDragListener(new dropableView());
+        aplicationAnimalPlaceholderView.setTag(CHOSED_TAG);
+
+    }
+    private final class draggableView implements View.OnTouchListener {
 
         @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            ClipData data = ClipData.newPlainText("simple_test", "teste");
-
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-            v.startDrag(data, shadowBuilder, v, 0);
-            v.setVisibility(View.INVISIBLE);
-            return false;
+        public boolean onTouch(View draggedView, MotionEvent event) {
+/*            String animalviewtext = draggedView.getTag().toString();
+            Log.e("teste", animalviewtext);*/
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                ClipData data = ClipData.newPlainText("simple_test", "teste");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(draggedView);
+                draggedView.startDrag(data, shadowBuilder, draggedView, 0);
+                return true;
+            } else {
+                return false;
+            }
         }
+
     }
 
-    class MyOnDragListener implements View.OnDragListener {
+    private class dropableView implements View.OnDragListener {
 
         @Override
-        public boolean onDrag(View draggedView, DragEvent event) {
-
-            int action = event.getAction();
-
-            switch (action){
-
+        public boolean onDrag(View dropedView, DragEvent event) {
+            switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    // Ação chamada quando o evento de arrastar inicia-se
-                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                        return (true);
-                    }else{
-                        return false;
-                    }
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    // Evento chamado quando o objeto arrastado entra em uma área específica
                     draggedView.setBackgroundColor(Color.BLACK);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    // Identifica quando o objeto arrastado deixou específica área
                     break;
-                case DragEvent.ACTION_DRAG_LOCATION:
-                    // Local do objeto arrastado
+                case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-
-                    // Identifica evento de soltar objeto arrastado
+                    View view4 = (View) event.getLocalState();
+                    String img_select4 = view4.getTag().toString();
+                    String teste4 = dropedView.getTag().toString();
+                    if (img_select4.equals(teste4)){
+                        Log.e("teste", "MATCH");
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    // Termina o evento.
+                    break;
+                default:
                     break;
             }
             return true;
         }
+
     }
 }

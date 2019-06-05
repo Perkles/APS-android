@@ -1,15 +1,18 @@
 package models;
 
 import android.content.Context;
-import android.view.ViewParent;
+import android.media.MediaPlayer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.IntStream;
 
-import dev.perkles.aps.Farm;
 import dev.perkles.aps.R;
 
 public class Enviroment {
@@ -42,23 +45,73 @@ public class Enviroment {
 
     public List<Animal> randomize(int maxAmount, LinearLayout aplicationAnimalPhotoView, LinearLayout aplicationAnimalPhotoViewTwoo, LinearLayout aplicationAnimalPhotoViewThree) {
         List<Animal> randomizedList = new ArrayList<>();
+        List<Integer> uniqueIndexes = new ArrayList<>();
+
+        int RandomViewOrder[] = generateRandomViewOrder();
+
         while (maxAmount != 0){
             Random randomize = new Random();
-            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() +1);
-            if (randomIndex == 0){
-                randomIndex +=1;
+            int randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 2 ;
+
+            if(uniqueIndexes.contains(randomIndex)){
+                while (uniqueIndexes.contains(randomIndex)){
+                    randomIndex = randomize.nextInt(this.enviromentAnimals.size() - 1) + 2 ;
+                }
             }
-            if (maxAmount == 1){
+            uniqueIndexes.add(randomIndex);
+
+            if (maxAmount == RandomViewOrder[0]){
+                String IMAGEVIEW_TAG = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoView.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-            }else if(maxAmount == 2){
+                aplicationAnimalPhotoView.setTag(IMAGEVIEW_TAG);
+            }else if(maxAmount == RandomViewOrder[1]){
+                String IMAGEVIEW_TAG2 = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewTwoo.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
-            }else if(maxAmount == 3){
+                aplicationAnimalPhotoViewTwoo.setTag(IMAGEVIEW_TAG2);
+            }else if(maxAmount == RandomViewOrder[2]){
+                String IMAGEVIEW_TAG3 = this.returnAnimalById(randomIndex).getAnimalName();
                 aplicationAnimalPhotoViewThree.addView(this.returnAnimalById(randomIndex).getAnimalPhoto());
+                aplicationAnimalPhotoViewThree.setTag(IMAGEVIEW_TAG3);
             }
             randomizedList.add(this.returnAnimalById(randomIndex));
             maxAmount -=1;
         }
         return randomizedList;
+    }
+
+    public int[] generateRandomViewOrder(){
+        int intArray[] = new int[3];
+        int randomOrderIndex = 3;
+
+        Random randomizeNumber = new Random();
+
+        while (randomOrderIndex !=0){
+
+            int randomIndex = randomizeNumber.nextInt(4 - 1) + 1;
+
+            if(contains(intArray, randomIndex)){
+                while(contains(intArray, randomIndex)){
+                    randomIndex = randomizeNumber.nextInt(4 - 1) + 1;
+                }
+            }
+            intArray[randomOrderIndex -1] = randomIndex;
+            randomOrderIndex -= 1;
+        }
+        return intArray;
+    }
+
+    public static boolean contains(int[] array, int v) {
+
+        boolean result = false;
+
+        for(int i : array){
+            if(i == v){
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 
     public Animal choseOneAnimalFrom(List<Animal> randomizeAnimals) {
@@ -82,10 +135,12 @@ public class Enviroment {
 
         Animal donkey = new Animal();
         donkey.setId(1);
-        donkey.setAnimalName("Downkey");
+        donkey.setAnimalName("Donkey");
         donkey.setAnimalPhoto(imageViewDonkey);
         donkey.setAnimalShadow(imageViewDonkeyShwadow);
 
+        MediaPlayer donkey_sound_effect = MediaPlayer.create(viewContext,R.raw.horse_sf);
+        donkey.setAnimalSound(donkey_sound_effect);
 
         ImageView imageViewSheep = new ImageView(viewContext);
         imageViewSheep.setImageResource(R.drawable.sheep);
@@ -98,6 +153,9 @@ public class Enviroment {
         sheep.setAnimalPhoto(imageViewSheep);
         sheep.setAnimalShadow(imageViewSheepShadow);
 
+        MediaPlayer sheep_sound_effect = MediaPlayer.create(viewContext,R.raw.sheep_sf);
+        donkey.setAnimalSound(sheep_sound_effect);
+
         ImageView imageViewRooster = new ImageView(viewContext);
         imageViewRooster.setImageResource(R.drawable.rooster);
         ImageView imageViewRoosterShadow = new ImageView(viewContext);
@@ -109,6 +167,9 @@ public class Enviroment {
         rooster.setAnimalPhoto(imageViewRooster);
         rooster.setAnimalShadow(imageViewRoosterShadow);
 
+        MediaPlayer rooster_sound_effect = MediaPlayer.create(viewContext,R.raw.rooster_sf);
+        donkey.setAnimalSound(rooster_sound_effect);
+
         ImageView imageViewPig = new ImageView(viewContext);
         imageViewPig.setImageResource(R.drawable.pig);
         ImageView imageViewPigShadow = new ImageView(viewContext);
@@ -119,6 +180,9 @@ public class Enviroment {
         pig.setAnimalName("Pig");
         pig.setAnimalPhoto(imageViewPig);
         pig.setAnimalShadow(imageViewPigShadow);
+
+        MediaPlayer pig_sound_effect = MediaPlayer.create(viewContext,R.raw.pig_sf);
+        donkey.setAnimalSound(pig_sound_effect);
 
         this.setAnimal(donkey);
         this.setAnimal(sheep);
