@@ -39,6 +39,16 @@ public class Enviroment {
         return pickedAnimal;
     }
 
+    public Animal returnAnimalByName(String animalName){
+        Animal pickedAnimal = new Animal();
+        for (Animal animal : this.enviromentAnimals) {
+            if(animalName == animal.getAnimalName()){
+                pickedAnimal = animal;
+            }
+        }
+        return pickedAnimal;
+    }
+
     public void setAnimal(Animal animal) {
        this.enviromentAnimals.add(animal);
     }

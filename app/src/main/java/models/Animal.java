@@ -46,8 +46,8 @@ public class Animal {
     public MediaPlayer getAnimalSound() {
         return animalSound;
     }
-
     public void setAnimalSound(MediaPlayer animalSound) {
         this.animalSound = animalSound;
     }
+
 }

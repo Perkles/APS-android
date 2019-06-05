@@ -1,7 +1,9 @@
 package dev.perkles.aps;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,15 +31,15 @@ public class Farm extends AppCompatActivity {
         LinearLayout imageView3 = findViewById(R.id.animal_photo_three);
 
         Context context = this;
-      
+
         Enviroment farmEnviroment = new Enviroment();
-      
+
         farmEnviroment.populate(context);
-      
+
         List<Animal> randomizeAnimals = farmEnviroment.randomize(3,imageView1,imageView2,imageView3);
-      
+
         Animal chosedAnimal = farmEnviroment.choseOneAnimalFrom(randomizeAnimals);
-      
+
         aplicationAnimalPlaceholderView.addView(chosedAnimal.getAnimalShadow());
 
         imageView1.setOnTouchListener(new draggableView());
@@ -50,11 +52,8 @@ public class Farm extends AppCompatActivity {
 
     }
     private final class draggableView implements View.OnTouchListener {
-
         @Override
         public boolean onTouch(View draggedView, MotionEvent event) {
-/*            String animalviewtext = draggedView.getTag().toString();
-            Log.e("teste", animalviewtext);*/
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("simple_test", "teste");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(draggedView);
@@ -68,15 +67,11 @@ public class Farm extends AppCompatActivity {
     }
 
     private class dropableView implements View.OnDragListener {
-
         @Override
         public boolean onDrag(View dropedView, DragEvent event) {
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    draggedView.setBackgroundColor(Color.BLACK);
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
@@ -86,6 +81,8 @@ public class Farm extends AppCompatActivity {
                     String teste4 = dropedView.getTag().toString();
                     if (img_select4.equals(teste4)){
                         Log.e("teste", "MATCH");
+                        finish();
+                        startActivity(getIntent());
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
